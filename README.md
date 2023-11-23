@@ -1,3 +1,5 @@
+UnFinshed Project
+
 # Traffic_Light
 Implement Taffic Light Using Tm4c123GH6PM (Tiva C).
 
@@ -8,6 +10,8 @@ pedestrian has to press on a button to have his light green to cross the street 
 
 # Specifications
 Using two timers to configure the span of the traffic lights.
+
 Using LEDs as outputs, and push buttons as input.
+
 Using interrupts also in this project for the push buttons and timers.
 
