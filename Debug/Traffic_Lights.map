@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker PC v20.2.7                     
 ******************************************************************************
->> Linked Thu Nov 23 02:10:02 2023
+>> Linked Thu Nov 23 05:04:41 2023
 
 OUTPUT FILE NAME:   <Traffic_Lights.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00000875

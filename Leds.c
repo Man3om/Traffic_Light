@@ -1,6 +1,12 @@
 #include "tm4c123gh6pm_registers.h"
 #include "Leds.h"
 
+
+/*
+ *Description: Initialize LEDs in PortB
+ *Input: Void
+ *Return: Void
+ */
 void LEDS_PORTB_Init(void)
 {
     GPIO_PORTB_AMSEL_REG = 0x00;          /* Disable Analog on PB0 ~ PB7 */
@@ -12,6 +18,11 @@ void LEDS_PORTB_Init(void)
 }
 
 
+/*
+ *Description: Initialize LEDs in PortA
+ *Input: Void
+ *Return: Void
+ */
 void LEDS_PORTA_Init(void)
 {
     GPIO_PORTA_AMSEL_REG &= 0xCF;          /* Disable Analog on PA4 , PA5*/
@@ -22,6 +33,11 @@ void LEDS_PORTA_Init(void)
     GPIO_PORTA_DATA_REG  &= 0xCF;          /* Clear bit PA4 , PA5 in Data register to turn off the leds */
 }
 
+/*
+ *Description: Turn LED on
+ *Input: PORT_ID , PIN_ID
+ *Return: Void
+ */
 void LED_ON(uint8 Led_Port , uint8 Led_Pin)
 {
     switch(Led_Port)
@@ -36,6 +52,11 @@ void LED_ON(uint8 Led_Port , uint8 Led_Pin)
     }
 }
 
+/*
+ *Description: Turn off LED
+ *Input: PORT_ID , PIN_ID
+ *Return: Void
+ */
 void LED_OFF(uint8 Led_Port , uint8 Led_Pin)
 {
     switch(Led_Port)
