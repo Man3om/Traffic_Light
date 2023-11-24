@@ -19,6 +19,8 @@ volatile Traffic_State g_state = A ;
  */
 void Traffic_Timer(void)
 {
+    g_countTraffic++;                               /* Increase Seconds Every ISR */
+
     /* Checking Flag & Seconds */
     if((g_flagTraffic == 0) && (g_countTraffic == 5)) /* After 5 Seconds */
     {
@@ -100,6 +102,8 @@ void Traffic_Timer(void)
  */
 void Button_Timer(void)
 {
+    g_countButton++;                               /* Increase Seconds Every ISR */
+
     if(g_countButton == 2) /* After 2 Seconds */
     {
         switch (g_flagButton)                      /* Choose Between 2 Buttons */
