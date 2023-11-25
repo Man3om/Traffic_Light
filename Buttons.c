@@ -16,20 +16,23 @@ static volatile void (*g_ptrb) (void) = NULL_PTR ;
 void PORTF_Handler(void)
 {
     /* Check Which Button is Pressed */
-    if(!(GPIO_PORTF_DATA_REG & (1<<0)))
+    /*
+    if( & (1<<0))
     {
         if(g_ptrb != NULL_PTR)
         {
-            g_ptrb(); /* Call Function for Button B (SW02) */
+            g_ptrb();  Call Function for Button B (SW02)
         }
     }
-    else if(!(GPIO_PORTF_DATA_REG & (1<<4)))
+    else if( & (1<<4))
     {
         if(g_ptra != NULL_PTR)
         {
-            g_ptra(); /* Call Function for Button  (SW01) */
+            g_ptra();  Call Function for Button  (SW01)
         }
-    }
+    } */
+
+    // Clear Interrupt
 }
 
 /*

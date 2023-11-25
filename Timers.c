@@ -19,6 +19,8 @@ void Timer0B_Handler(void)
     {
         g_ptrButtons();  /* Call Function for Buttons Timer */
     }
+
+    // Clear Interrupt
 }
 
 /*
@@ -32,6 +34,8 @@ void Timer0A_Handler(void)
     {
         g_ptrTraffic();  /* Call Function for Traffic Timer */
     }
+
+    // Clear Interrupt
 }
 
 /*
