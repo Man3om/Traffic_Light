@@ -9,6 +9,32 @@ static volatile void (*g_ptrButtons) (void) = NULL_PTR ;
 /*************************************************************************************************************************/
 
 /*
+ *Description: ISR Function For Timer0B IRQ
+ *Input: Void
+ *Return: Void
+ */
+void Timer0B_Handler(void)
+{
+    if(g_ptrButtons != NULL_PTR)
+    {
+        g_ptrButtons();  /* Call Function for Buttons Timer */
+    }
+}
+
+/*
+ *Description: ISR Function For Timer0A IRQ
+ *Input: Void
+ *Return: Void
+ */
+void Timer0A_Handler(void)
+{
+    if(g_ptrTraffic != NULL_PTR)
+    {
+        g_ptrTraffic();  /* Call Function for Traffic Timer */
+    }
+}
+
+/*
  *Description: Initialize Timer 0 For Traffics
  *Input: Void
  *Return: Void
@@ -17,7 +43,6 @@ void Timers_TrafficInit(void)
 {
 
 }
-
 
 /*
  *Description: Initialize Timer 1 For Buttons

@@ -8,6 +8,29 @@ static volatile void (*g_ptra) (void) = NULL_PTR ;
 static volatile void (*g_ptrb) (void) = NULL_PTR ;
 /*************************************************************************************************************************/
 
+/*
+ *Description: ISR Function For GPIO PORTF IRQ
+ *Input: Void
+ *Return: Void
+ */
+void PORTF_Handler(void)
+{
+    /* Check Which Button is Pressed */
+    if(!(GPIO_PORTF_DATA_REG & (1<<0)))
+    {
+        if(g_ptrb != NULL_PTR)
+        {
+            g_ptrb(); /* Call Function for Button B (SW02) */
+        }
+    }
+    else if(!(GPIO_PORTF_DATA_REG & (1<<4)))
+    {
+        if(g_ptra != NULL_PTR)
+        {
+            g_ptra(); /* Call Function for Button  (SW01) */
+        }
+    }
+}
 
 /*
  *Description: CallBack Function To Handle Time Of LEDs Traffic
