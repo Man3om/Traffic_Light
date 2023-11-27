@@ -33,9 +33,6 @@ void ResetISR(void);
 static void NmiSR(void);
 static void FaultISR(void);
 static void IntDefaultHandler(void);
-void PORTF_Handler(void);
-void Timer0A_Handler(void);
-void Timer0B_Handler(void);
 
 //*****************************************************************************
 //
@@ -57,7 +54,9 @@ extern uint32_t __STACK_TOP;
 // External declarations for the interrupt handlers used by the application.
 //
 //*****************************************************************************
-// To be added by user
+void PORTF_Handler(void);
+void Timer0A_Handler(void);
+void Timer0B_Handler(void);
 
 //*****************************************************************************
 //
