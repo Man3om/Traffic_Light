@@ -55,8 +55,8 @@ extern uint32_t __STACK_TOP;
 //
 //*****************************************************************************
 void PORTF_Handler(void);
-void Timer0A_Handler(void);
-void Timer0B_Handler(void);
+void Timer0_Handler(void);
+void Timer1_Handler(void);
 
 //*****************************************************************************
 //
@@ -104,9 +104,9 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // ADC Sequence 2
     IntDefaultHandler,                      // ADC Sequence 3
     IntDefaultHandler,                      // Watchdog timer
-    Timer0A_Handler  ,                      // Timer 0 subtimer A
-    Timer0B_Handler  ,                      // Timer 0 subtimer B
-    IntDefaultHandler,                      // Timer 1 subtimer A
+    Timer0_Handler   ,                      // Timer 0 subtimer A
+    IntDefaultHandler,                      // Timer 0 subtimer B
+    Timer1_Handler   ,                      // Timer 1 subtimer A
     IntDefaultHandler,                      // Timer 1 subtimer B
     IntDefaultHandler,                      // Timer 2 subtimer A
     IntDefaultHandler,                      // Timer 2 subtimer B

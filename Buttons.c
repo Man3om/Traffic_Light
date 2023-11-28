@@ -16,23 +16,24 @@ static volatile void (*g_ptrb) (void) = NULL_PTR ;
 void PORTF_Handler(void)
 {
     /* Check Which Button is Pressed */
-    /*
-    if( & (1<<0))
+    if(GPIO_PORTF_RIS_REG & (1<<0))
     {
         if(g_ptrb != NULL_PTR)
         {
-            g_ptrb();  Call Function for Button B (SW02)
+            g_ptrb();  /* Call Function for Button B (SW02) */
+
+            GPIO_PORTF_ICR_REG |= (1<<0) ; /* Clear Interrupt Flag For PF0 */
         }
     }
-    else if( & (1<<4))
+    else if(GPIO_PORTF_RIS_REG & (1<<4))
     {
         if(g_ptra != NULL_PTR)
         {
-            g_ptra();  Call Function for Button  (SW01)
-        }
-    } */
+            g_ptra();  /* Call Function for Button  (SW01) */
 
-    // Clear Interrupt
+            GPIO_PORTF_ICR_REG |= (1<<4) ; /* Clear Interrupt Flag For PF4 */
+        }
+    }
 }
 
 /*
@@ -50,6 +51,13 @@ void Buttons_Init(void)
     GPIO_PORTF_AFSEL_REG &= 0xEE;         /* Disable alternative function on PF0 , PF4 */
     GPIO_PORTF_PUR_REG   |= 0x11;         /* Enable pull-up on PF0 , PF4 */
     GPIO_PORTF_DEN_REG   |= 0x11;         /* Enable Digital I/O on PF0 , PF4 */
+    GPIO_PORTF_IS_REG    &= 0xEE;         /* Choosing Edge Trigger Interrupt */
+    GPIO_PORTF_IBE_REG   &= 0xEE;         /* Interrupt on one Edge */
+    GPIO_PORTF_IEV_REG   &= 0xEE;         /* Falling Edge */
+    GPIO_PORTF_IM_REG    |= 0x11;         /* Enable Module Interrupt on PF0 , PF4 */
+    NVIC_PRI7_REG = (NVIC_PRI7_REG & GPIO_PORTF_PRIORITY_MASK) |           /* Setup Priority*/
+            (GPIO_PORTF_INTERRUPT_PRIORITY << GPIO_PORTF_PRIORITY_BITS_POS);
+    NVIC_EN0_REG |= (1<<30);              /* Enable Interrupt For GPIO PORTF */
 }
 
 

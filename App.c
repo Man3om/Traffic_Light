@@ -19,7 +19,7 @@ volatile Traffic_State g_state = A ;
  */
 void Traffic_Timer(void)
 {
-    g_countTraffic++;                               /* Increase Seconds Every ISR */
+    g_countTraffic++;                                 /* Increase Seconds Every ISR */
 
     /* Checking Flag & Seconds */
     if((g_flagTraffic == 0) && (g_countTraffic == 5)) /* After 5 Seconds */
@@ -199,6 +199,9 @@ void Run_APP(void)
     SYSCTL_RCGCGPIO_REG |= 0x23;                /* Enable PORTA & PORTB & PORTF Clocks */
     while((SYSCTL_PRGPIO_REG & 0x23) != 0x23);  /* Waiting For Clocks */
 
+    SYSCTL_RCGCTIMER_REG |= 0x03 ;              /* Enable Timer0 & Timer1 Clock */
+    while((SYSCTL_PRTIMER_REG & 0x03) != 0x03); /* Waiting For Clocks */
+
     Buttons_SetCallbackA(ButtonA);              /* Setup CallBack Function For Button A */
     Buttons_SetCallbackB(ButtonB);              /* Setup CallBack Function For Button B */
 
@@ -209,8 +212,8 @@ void Run_APP(void)
     LEDS_PORTB_Init() ;
     LEDS_PORTA_Init() ;
     Buttons_Init();
-    Timers_TrafficInit();
-    Timers_ButtonInit();
+    Timer0_Init();
+    Timer1_Init();
 
     Timers_ButtonStop();                        /* Stop Button Timer */
 
@@ -222,9 +225,12 @@ void Run_APP(void)
 
     g_state = A ;                               /* Setup First State For Traffic */
 
-    while(1) ;                                  /* Super Loop */
+    Enable_Exceptions();                        /* Enable Exceptions */
+    Enable_Faults();                            /* Enable Faults */
+
+    while(1)
+    {
+         Wait_For_Interrupt();                  /* Sleep Mode */
+    }
 }
-
-
-
 
