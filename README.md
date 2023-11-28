@@ -1,5 +1,3 @@
-UnFinshed Project
-
 # Traffic_Light
 Implement Taffic Light Using Tm4c123GH6PM (Tiva C).
 
