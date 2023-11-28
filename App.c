@@ -102,39 +102,32 @@ void Traffic_Timer(void)
  */
 void Button_Timer(void)
 {
-    g_countButton++;                               /* Increase Seconds Every ISR */
-
-    if(g_countButton == 2) /* After 2 Seconds */
+    switch (g_flagButton)                      /* Choose Between 2 Buttons */
     {
-        switch (g_flagButton)                      /* Choose Between 2 Buttons */
-        {
-        case 1:
-            Timers_ButtonStop() ;                  /* Stop Timer Buttons */
+    case 1:
+        Timers_ButtonStop() ;                  /* Stop Timer Buttons */
 
-            LED_OFF(Traffic_Port, TrafficA_Red);   /* Turn off Red Led For Traffic A */
-            LED_OFF(ButtonA_Port, ButtonA_Green);  /* Turn off Green Led For Button A */
+        LED_OFF(Traffic_Port, TrafficA_Red);   /* Turn off Red Led For Traffic A */
+        LED_OFF(ButtonA_Port, ButtonA_Green);  /* Turn off Green Led For Button A */
 
-            LED_ON(Traffic_Port, TrafficA_Green);  /* Turn on Green Led For Traffic A */
-            LED_ON(ButtonA_Port, ButtonA_Red);     /* Turn on Red Led For Button A */
+        LED_ON(Traffic_Port, TrafficA_Green);  /* Turn on Green Led For Traffic A */
+        LED_ON(ButtonA_Port, ButtonA_Red);     /* Turn on Red Led For Button A */
 
-            Timers_TrafficResume();                /* Resume Traffic Timer */
+        Timers_TrafficResume();                /* Resume Traffic Timer */
 
-            break;
-        case 2:
-            Timers_ButtonStop() ;                  /* Stop Timer Buttons */
+        break;
+    case 2:
+        Timers_ButtonStop() ;                  /* Stop Timer Buttons */
 
-            LED_OFF(Traffic_Port, TrafficB_Red);   /* Turn off Red Led For Traffic B */
-            LED_OFF(ButtonB_Port, ButtonB_Green);  /* Turn off Green Led For Button B */
+        LED_OFF(Traffic_Port, TrafficB_Red);   /* Turn off Red Led For Traffic B */
+        LED_OFF(ButtonB_Port, ButtonB_Green);  /* Turn off Green Led For Button B */
 
-            LED_ON(Traffic_Port, TrafficB_Green);  /* Turn on Green Led For Traffic B */
-            LED_ON(ButtonA_Port, ButtonB_Red);     /* Turn on Red Led For Button B */
+        LED_ON(Traffic_Port, TrafficB_Green);  /* Turn on Green Led For Traffic B */
+        LED_ON(ButtonA_Port, ButtonB_Red);     /* Turn on Red Led For Button B */
 
-            Timers_TrafficResume();                /* Resume Traffic Timer */
+        Timers_TrafficResume();                /* Resume Traffic Timer */
 
-            break;
-        }
-
-        g_countButton = 0 ;                        /* Reset Counter For Next Period of Seconds */
+        break;
     }
 }
 
@@ -230,7 +223,7 @@ void Run_APP(void)
 
     while(1)
     {
-         Wait_For_Interrupt();                  /* Sleep Mode */
+        Wait_For_Interrupt();                  /* Sleep Mode */
     }
 }
 

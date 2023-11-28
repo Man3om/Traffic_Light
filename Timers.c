@@ -9,30 +9,30 @@ static volatile void (*g_ptrButtons) (void) = NULL_PTR ;
 /*************************************************************************************************************************/
 
 /*
- *Description: ISR Function For Timer0B IRQ
+ *Description: ISR Function For Timer0 IRQ
  *Input: Void
  *Return: Void
  */
 void Timer0_Handler(void)
 {
-    if(g_ptrButtons != NULL_PTR)
+    if(g_ptrTraffic != NULL_PTR)
     {
-        g_ptrButtons();                    /* Call Function for Buttons Timer */
+        g_ptrTraffic();                    /* Call Function for Buttons Timer Every 2 Seconds */
     }
 
     TIMER0_ICR_REG  |= (1<<0) ;            /* Timer0 timeout flag bit clears */
 }
 
 /*
- *Description: ISR Function For Timer0A IRQ
+ *Description: ISR Function For Timer1 IRQ
  *Input: Void
  *Return: Void
  */
 void Timer1_Handler(void)
 {
-    if(g_ptrTraffic != NULL_PTR)
+    if(g_ptrButtons != NULL_PTR)
     {
-        g_ptrTraffic();                   /* Call Function for Traffic Timer */
+        g_ptrButtons();                   /* Call Function for Traffic Timer Every 1 Second */
     }
 
     TIMER1_ICR_REG  |= (1<<0) ;           /* Timer1 timeout flag bit clears */
@@ -68,7 +68,7 @@ void Timer1_Init(void)
     TIMER1_CTL_REG   = 0 ;                /* Disable Timer 1 */
     TIMER1_CFG_REG   = 0x00 ;             /* Select Timer 32 Bits Mode */
     TIMER1_TAMR_REG  = 0x02;              /* Select Periodic Timer For Timer1 */
-    TIMER1_TAILR_REG = 15999999 ;         /* Set Initial Value For Timer1 For 1 Second */
+    TIMER1_TAILR_REG = 31999999 ;         /* Set Initial Value For Timer1 For 2 Second */
     TIMER1_IMR_REG  |= (1<<0) ;           /* Enable Interrupt Level For Timer1*/
     TIMER1_ICR_REG  |= (1<<0) ;           /* Timer1 timeout flag bit clears */
     NVIC_EN0_REG    |= (1<<21);           /* Enable NVIC Interrupt For Timer 1 */
