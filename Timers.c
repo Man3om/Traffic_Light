@@ -84,10 +84,12 @@ void Timer1_Init(void)
  */
 void Timers_ButtonStart(void)
 {
+    __asm(" CPSID I ") ;                          /* Disable Exceptions */
+    TIMER1_TAILR_REG = 31999999 ;                 /* Set Initial Value For Timer1 For 2 Second */
+    __asm(" CPSIE I ") ;                          /* Enable Exceptions */
+
     SYSCTL_RCGCTIMER_REG |= (1<<1) ;              /* Enable Timer1 Clock */
     while(!(SYSCTL_PRTIMER_REG & 0x02));          /* Waiting For Clock */
-
-    // Reset Timer
 }
 
 
