@@ -8,7 +8,7 @@
  *                                                 GLobal Variables
  *************************************************************************************************************************/
 typedef enum {A , B} Traffic_State ; /* Enumeration For Traffic States (Traffic A or traffic B) */
-volatile uint8 g_flagTraffic = 0 , g_flagButton = 0 , g_countTraffic = 0 , g_countButton = 0 ;
+volatile uint8 g_flagTraffic = 0 , g_flagButton = 0 , g_countTraffic = 0 ;
 volatile Traffic_State g_state = A ;
 /*************************************************************************************************************************/
 
